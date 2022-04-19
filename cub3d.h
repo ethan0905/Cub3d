@@ -51,45 +51,17 @@ typedef struct s_data
 	int		y;
 }				t_data;
 
-typedef struct s_intro
-{
-	t_data	one;
-	t_data	two;
-	t_data	three;
-	t_data	four;
-	t_data	five;
-}				t_intro;
-
 typedef struct s_param
 {
 	char	**map;
 	int		width;
-	int		width_with_x;
 	int		height;
-	int		height_with_wall;
-	int		rendered;
 }				t_param;
 
 typedef struct s_player
 {
-	int		pos_i;
-	int		lastpos_i;
-	int		pos_j;
-	int		lastpos_j;
 	int		pos_x;
 	int		pos_y;
-	int		steps;
-	int		lock_pos;
-	int		hurt;
-	t_data	frontside;
-	t_data	backside;
-	t_data	rightside;
-	t_data	leftside;
-	t_data	dmg_front;
-	t_data	dmg_back;
-	t_data	dmg_right;
-	t_data	dmg_left;
-	t_data	*side;
 }	t_player;
 
 typedef struct s_tex
