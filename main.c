@@ -12,59 +12,39 @@
 
 #include "cub3d.h"
 
-void	draw_all_together(t_test *test)
-{
-	draw_background(test);
-	draw_walls(test);
-	draw_floors(test);
-	draw_trap(test);
-	draw_exit(test);
-	draw_furnitures(test);
-	draw_collectibles(test);
-	if (test->param.rendered == 0)
-		test->player.side = &test->player.frontside;
-	draw_player(test);
-	mlx_put_image_to_window(test->mlx, test->win, test->data.img, 0, 0);
-	draw_score(test);
-	draw_button(test);
-	test->param.rendered = 1;
-	if (test->dialog_box.keep == 1)
-		draw_dialog_box(test);
-	draw_life(test);
-}
-
 int	render(t_test *test)
 {
-	draw_all_together(test);
 	test->frame++;
 	if (test->frame % 40 / 32 == 1)
 		test->frame = 0;
 	return (0);
 }
 
-void	get_all_images_and_addresses(t_test *test)
+int	close_win_cross(t_test *test)
 {
-	get_event(test);
-	get_piano(test);
-	get_chimney_and_dresser(test);
-	get_fire(test);
-	get_collec(test);
-	get_remain(test);
-	get_player(test);
-	get_stats(test);
-	get_exit(test);
+	mlx_loop_end (test->mlx);
+//	clean_exit(test);
+	return (0);
+}
+
+int	handle_keypress(int keysym, t_test *test)
+{
+	if (keysym == ESC)
+		exit(0);
+	else if (keysym != ESC)
+		write(1, &keysym, 1);
 }
 
 int	main(int ac, char **av)
 {
 	t_test	test;
 
-	get_map(&test, ac, av);
+//	get_map(&test, ac, av);
 	test.mlx = mlx_init();
-	test.win = mlx_new_window(test.mlx, test.param.width_with_x * 64 - (2 * 64), (test.param.height - 2) * 64 + 3 * 64, "cub3d");
-	test.data.img = mlx_new_image(test.mlx, test.param.width_with_x * 64 - (2 * 64), (test.param.height - 2) * 64 + 3 * 64);
+	test.win = mlx_new_window(test.mlx, 250, 250, "cub3d");
+	test.data.img = mlx_new_image(test.mlx, 250, 250);
 	test.data.addr = mlx_get_data_addr(test.data.img, &test.data.bits_per_pixel, &test.data.line_length, &test.data.endian);
-	get_all_images_and_addresses(&test);
+	// get_all_images_and_addresses(&test);
 	mlx_hook(test.win, 2, 1L << 0, &handle_keypress, &test);
 	mlx_loop_hook(test.mlx, render, &test);
 	mlx_hook(test.win, 17, 1L << 0, &close_win_cross, &test);

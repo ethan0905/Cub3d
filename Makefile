@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/07 22:58:48 by mahautlat         #+#    #+#              #
-#    Updated: 2022/04/19 14:59:17 by esafar           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 SRCS =	main.c \
 		./get_next_line/get_next_line.c \
 		./get_next_line/get_next_line_utils.c \
@@ -27,9 +15,9 @@ UNAME		:= $(shell uname)
 
 PATH_MLX	= mlx
 CC 			= gcc
-CFLAGS		= -g3 -Wall -Wextra -Werror -D BUFFER_SIZE=1
+CFLAGS		= -D BUFFER_SIZE=1 #-g3 -Wall -Wextra -Werror 
 RM			= rm -f
-NAME		= so_long
+NAME		= cub3d
 FLAGS		= -ldl -Imlx -Lmlx -lmlx -lm -lbsd -lXext -lX11 -Wl,-rpath=./bass/,-rpath=./mlx/,-rpath=./delay/
 #FLAGS		= -ldl -Imlx -Lmlx -lmlx -lm -lz -lXext -lX11 -Wl,-rpath=./bass/,-rpath=./mlx/,-rpath=./delay/
 
