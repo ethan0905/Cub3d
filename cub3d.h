@@ -76,7 +76,6 @@ typedef struct s_test
 {
 	void		*mlx;
 	void		*win;
-	int			frame;
 	int			loop;
 	t_param		param;
 	t_data		data;
@@ -93,7 +92,6 @@ void	check_game_keypress(t_test *test, int keysym);
 
 //UTILS
 int		get_pixel(t_data *img, int x, int y);
-void	my_mlx_pixel_put(t_test *test, int x, int y, int color);
 void	draw_on_image(t_test *test, t_data *img, int startx, int starty);
 void	draw_on_image_bis(t_test *test, t_data *img, int startx, int starty);
 void	draw_on_image_intro(t_test *test, t_data *img, int startx, int starty);
