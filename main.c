@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 // ///
-// #include <cmath>
+#include <math.h>
 // #include <string>
 // #include <vector>
 // #include <iostream>
@@ -20,65 +20,106 @@
 // ///
 
 #include "cub3d.h"
+#define PI 3.1415926535
 
-#define mapWidth 24
-#define mapHeight 24
+#define mapWidth 8
+#define mapHeight 8
+#define mapS 64
 #define screenWidth 640
 #define screenHeight 480
 
-int worldMap[mapWidth][mapHeight]=
+#define w 60
+#define h 60
+
+float px, py, pdx, pdy, pa;
+
+int worldMap[]=
 {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+  1,1,1,1,1,1,1,1,
+  1,0,1,0,0,0,0,1,
+  1,0,1,0,0,0,0,1,
+  1,0,1,0,0,0,0,1,
+  1,0,0,0,0,0,0,1,
+  1,0,0,0,0,1,0,1,
+  1,0,0,0,0,0,0,1,
+  1,1,1,1,1,1,1,1,
 };
 
-float px, py;
-
-// void	drawBackground(t_test *test)
-// {
-// 	int x, y;
-
-// 	x = 0;
-// 	while (x < 512)
-// 	{
-// 		y = 0;
-// 		while (y < 1024)
-// 		{
-// 			mlx_pixel_put(test->mlx, test->win, px + x, py + y, 0x808080);
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	int	*dst;
+	char	*dest;
 
-	dst = data->addr + (y * 720 + x);
-	*(int *)dst = color;
+	dest = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dest = color;
+}
+
+void	drawBackground(t_test *test)
+{
+	int x, y;
+
+	y = 0;
+	while (y < 512)
+	{
+		x = 0;
+		while (x < 1024)
+		{
+			my_mlx_pixel_put(&test->data, x, y, 0x808080);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	drawMap2D(t_test *test)
+{
+	int x, y, xo, yo;
+	int i, j;
+
+	y = 0;
+	while (y < mapHeight)
+	{
+		x = 0;
+		while (x < mapWidth)
+		{
+			if (worldMap[y * mapWidth + x] == 1)
+			{
+				// printf("[1] ");
+				i=1;
+				while (i<w)
+				{
+					j = 1;
+					while (j<h)
+					{
+						my_mlx_pixel_put(&test->data, (x * w) + i, (y * h) + j, 0xffffff);
+						j++;
+					}
+					i++;
+					// printf("i=[%d]\n", i);
+				}
+			}
+			else
+			{
+				// printf("[0] ");
+				i=1;
+				while (i<w)
+				{
+					j = 1;
+					while (j<h)
+					{
+						my_mlx_pixel_put(&test->data, (x * w) + i, (y * h) + j, 0x000000);
+						j++;
+					}
+					i++;
+				}
+			}
+			// xo = x * mapS;
+			// yo = y * mapS;
+			x++;
+		}
+		// printf("\n");
+		y++;
+	}
 }
 
 void  drawPlayer(t_test *test)
@@ -91,16 +132,27 @@ void  drawPlayer(t_test *test)
 		y = 0;
 		while (y < 10)
 		{
-			my_mlx_pixel_put(&test->data, px + x, py + y, 0xffffff);
+			my_mlx_pixel_put(&test->data, px + x, py + y, 0xffff00);
 			y++;
 		}
 		x++;
+	}
+	x =0;
+	y = 0;
+	while (x< 25)
+	{
+		while (y< 25)
+		{
+			my_mlx_pixel_put(&test->data, px + x, py + y, 0xffff00);
+			y++;
+		}
 	}
 }
 
 int	render(t_test *test)
 {
-	// drawBackground(test);
+	drawBackground(test);
+	drawMap2D(test);
 	drawPlayer(test);
 	mlx_put_image_to_window(test->mlx, test->win, test->data.img, -1, -1);
 }
@@ -117,13 +169,35 @@ int	handle_keypress(int keysym, t_test *test)
 	if (keysym == ESC)
 		exit(0);
 	else if (keysym == W)
-		py -= 5;
+	{
+		px+=pdx;
+		py+=pdy;
+	}
 	else if (keysym == A)
-		px -= 5;
+	{
+		pa -= 0.1;
+		if (pa < 0)
+		{
+			pa+=2*PI;
+		}
+		pdx=cos(pa) *5;
+		pdy=sin(pa) *5;
+	}
 	else if (keysym == S)
-		py += 5;
+	{
+		px-=pdx;
+		py-=pdy;
+	}
 	else if (keysym == D)
-		px += 5;
+	{
+		pa += 0.1;
+		if (pa > 2*PI)
+		{
+			pa-=2*PI;
+		}
+		pdx=cos(pa) *5;
+		pdy=sin(pa) *5;
+	}
 	else if (keysym != ESC)
 		write(1, &keysym, 1);
 	render(test);
