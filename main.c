@@ -174,6 +174,11 @@ void	drawMap2D(t_test *test)
 	}
 }
 
+float dist(float ax, float ay, float bx, float by, float ang)
+{
+	return (sqrt((bx-ax) * (bx-ax) + (by-ay) * (by-ay)));
+}
+
 void	drawRays3D(t_test *test)
 {
 	int		mx;
@@ -182,6 +187,7 @@ void	drawRays3D(t_test *test)
 	float rx, ry, ra, xo, yo;
 	ra=pa;
 
+	// horizontal check
 	dof = 0;
 	if (ra < PI)
 	{
@@ -222,6 +228,48 @@ void	drawRays3D(t_test *test)
 	}
 	if (rx > 0 && ry > 0)
 		draw_line(test, px+5,py+5,rx,ry,0x00ff00);
+	//vertical check
+
+	dof = 0;
+	if (ra < P2 || ra > P3)
+	{
+		rx = (((int)px / 16) * 16) - 0.0001;
+		ry = (px - rx) * (-tan(ra)) + py;
+		xo = -16;
+		yo = -xo * (-tan(ra));
+	}
+	if (ra > P2 && ra < P3)
+	{
+		rx = (((int)px / 16) * 16) + 16;
+		ry = (px - rx) * (-tan(ra)) + py;
+		xo = 16;
+		yo = -xo * (-tan(ra));
+	}
+	if (!ra || ra == PI)
+	{
+		rx = px;
+		ry = py;
+		dof = mapWidth;
+	}
+	while (dof < mapWidth)
+	{
+		mx = (int)rx / 16;
+		my = (int)ry / 16;
+		if ((my >= 0 && mx >= 0 && my < mapHeight && mx < mapWidth)
+			&& (worldMap[my][mx] == 1))
+			// return (ft_dist(px, py, rx, ry));
+			break ;
+		else if (my < 0 || my < 0 || my > mapHeight || mx > mapWidth)
+			dof = mapWidth;
+		else
+		{
+			rx += xo;
+			ry += yo;
+			dof = dof + 1;
+		}
+	}
+	if (rx > 0 && ry > 0)
+		draw_line(test, px+5,py+5,rx,ry,0xff0000);
 }
 
 // void	drawRays3D(t_test *test)
