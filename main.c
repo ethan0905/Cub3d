@@ -186,6 +186,7 @@ void	drawRays3D(t_test *test)
 	int		my;
 	int 	r;
 	int		dof;
+	int color;
 	float rx, ry, ra, xo, yo, disT;
 
 	ra=pa-DR * 30;
@@ -295,6 +296,7 @@ void	drawRays3D(t_test *test)
 			rx=vx;
 			ry=vy;
 			disT=disV;
+			color = 0xF08080;
 			draw_line(test, px+5,py+5,rx,ry,0xff0000);
 		}
 		else if (disH<disV)
@@ -302,6 +304,7 @@ void	drawRays3D(t_test *test)
 			rx=hx;
 			ry=hy;
 			disT=disH;
+			color = 0xCD5C5C;
 			draw_line(test, px+5,py+5,rx,ry,0xff0000);
 		}
 
@@ -322,7 +325,7 @@ void	drawRays3D(t_test *test)
 		if (lineO<0)
 			lineO=0;
 		// printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
-		draw_line(test, r*1+530, lineO, r*1+530, lineH+lineO,0xff0000);
+		draw_line(test, r*1+530, lineO, r*1+530, lineH+lineO,color);
 
 		// ra+=DR;
 		ra+=DR/8;
