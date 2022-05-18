@@ -195,7 +195,7 @@ void	drawRays3D(t_test *test)
 		ra-=2*PI;
 
 	r = 0;
-	while (r < 60)
+	while (r < 480)
 	{
 		// horizontal check
 		float disH=1000000, hx=px, hy=py;
@@ -304,8 +304,6 @@ void	drawRays3D(t_test *test)
 			disT=disH;
 			draw_line(test, px+5,py+5,rx,ry,0xff0000);
 		}
-		else if (disH < 0)
-			printf("BLA BLAB BLA \n\n");
 
 		//draw 3d wall
 
@@ -323,11 +321,11 @@ void	drawRays3D(t_test *test)
 			lineH=320;
 		if (lineO<0)
 			lineO=0;
-		printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
-		// if (lineH + lineO > 0)
-		draw_line(test, r*8+530, lineO, r*8+530, lineH+lineO,0xff0000);
+		// printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
+		draw_line(test, r*1+530, lineO, r*1+530, lineH+lineO,0xff0000);
 
-		ra+=DR;
+		// ra+=DR;
+		ra+=DR/8;
 		if (ra < 0)
 			ra+=2*PI;
 		if (ra > 2*PI)
