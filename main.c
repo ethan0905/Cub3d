@@ -28,9 +28,9 @@
 
 #define mapWidth 24
 #define mapHeight 24
-#define mapS 64
-#define screenWidth 1920/2
-#define screenHeight 1080/2
+#define mapS 16
+#define screenWidth 1024
+#define screenHeight 512
 
 #define w 18
 #define h 18
@@ -57,7 +57,7 @@ int worldMap[mapWidth][mapHeight]=
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,0,0,0,5,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  {1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
   {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -186,7 +186,8 @@ void	drawRays3D(t_test *test)
 	int		my;
 	int 	r;
 	int		dof;
-	float rx, ry, ra, xo, yo;
+	float rx, ry, ra, xo, yo, disT;
+
 	ra=pa-DR * 30;
 	if (ra<0)
 		ra+=2*PI;
@@ -197,7 +198,7 @@ void	drawRays3D(t_test *test)
 	while (r < 60)
 	{
 		// horizontal check
-		float disH, hx=px, hy=py;
+		float disH=1000000, hx=px, hy=py;
 		dof = 0;
 		if (ra < PI)
 		{
@@ -245,7 +246,7 @@ void	drawRays3D(t_test *test)
 
 		//vertical check
 		dof = 0;
-		float disV, vx=px, vy=py;
+		float disV=1000000, vx=px, vy=py;
 		if (ra < P2 || ra > P3)
 		{
 			rx = (((int)px / 16) * 16) - 0.0001;
@@ -293,17 +294,37 @@ void	drawRays3D(t_test *test)
 		{
 			rx=vx;
 			ry=vy;
-			// printf("rx[%f] et ry[%f]\n", rx, ry);
+			disT=disV;
 			draw_line(test, px+5,py+5,rx,ry,0xff0000);
 		}
 		else if (disH<disV)
 		{
 			rx=hx;
 			ry=hy;
+			disT=disH;
 			draw_line(test, px+5,py+5,rx,ry,0xff0000);
 		}
-		else
+		else if (disH < 0)
 			printf("BLA BLAB BLA \n\n");
+
+		//draw 3d wall
+
+		float ca=pa-ra;
+		if (ca < 0)
+			ca+=2*PI;
+		if (ca>2*PI)
+			ca-=2*PI;
+		disT=disT*cos(ca);
+		float lineH=(320*16) / disT; //line height = (size_screen * size)/disT
+		// printf("lineH=%f\n", lineH);
+		float lineO=160-lineH/2;	//line offset
+
+		if (lineH>320)
+			lineH=320;
+		printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
+		if (lineH + lineO > 0)
+			draw_line(test, r*8+530, 0, r*8+530, lineH+lineO,0xff0000);
+
 		ra+=DR;
 		if (ra < 0)
 			ra+=2*PI;
