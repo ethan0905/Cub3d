@@ -321,7 +321,9 @@ void	drawRays3D(t_test *test)
 
 		if (lineH>320)
 			lineH=320;
-		// printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
+		if (lineO<0)
+			lineO=0;
+		printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
 		// if (lineH + lineO > 0)
 		draw_line(test, r*8+530, lineO, r*8+530, lineH+lineO,0xff0000);
 
