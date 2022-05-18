@@ -317,13 +317,13 @@ void	drawRays3D(t_test *test)
 		disT=disT*cos(ca);
 		float lineH=(320*16) / disT; //line height = (size_screen * size)/disT
 		// printf("lineH=%f\n", lineH);
-		float lineO=160-lineH/2;	//line offset
+		float lineO=320/2-lineH/2;	//line offset
 
 		if (lineH>320)
 			lineH=320;
-		printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
-		if (lineH + lineO > 0)
-			draw_line(test, r*8+530, 0, r*8+530, lineH+lineO,0xff0000);
+		// printf("H=[%f] || O = [%f] || res = [%f]\n", lineH, lineO, lineH+lineO);			
+		// if (lineH + lineO > 0)
+		draw_line(test, r*8+530, lineO, r*8+530, lineH+lineO,0xff0000);
 
 		ra+=DR;
 		if (ra < 0)
