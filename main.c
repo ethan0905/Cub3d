@@ -23,6 +23,7 @@
 #define PI 3.1415926535
 #define P2 PI/2
 #define P3 3*PI/2
+#define DR 0.0174533 // 1 degree in radians
 
 
 #define mapWidth 24
@@ -174,7 +175,7 @@ void	drawMap2D(t_test *test)
 	}
 }
 
-float dist(float ax, float ay, float bx, float by, float ang)
+float ft_dist(float ax, float ay, float bx, float by, float ang)
 {
 	return (sqrt((bx-ax) * (bx-ax) + (by-ay) * (by-ay)));
 }
@@ -183,93 +184,134 @@ void	drawRays3D(t_test *test)
 {
 	int		mx;
 	int		my;
+	int 	r;
 	int		dof;
 	float rx, ry, ra, xo, yo;
-	ra=pa;
+	ra=pa-DR * 30;
+	if (ra<0)
+		ra+=2*PI;
+	if (ra>2*PI)
+		ra-=2*PI;
 
-	// horizontal check
-	dof = 0;
-	if (ra < PI)
+	r = 0;
+	while (r < 60)
 	{
-		ry = (((int)py / 16) * 16) - 0.0001;
-		rx = (py - ry) * (-1 / tan(ra)) + px;
-		yo = -16;
-		xo = -yo * (-1 / tan(ra));
-	}
-	if (ra > PI)
-	{
-		ry = (((int)py / 16) * 16) + 16;
-		rx = (py - ry) * (-1 / tan(ra)) + px;
-		yo = 16;
-		xo = -yo * (-1 / tan(ra));
-	}
-	if (!ra || ra == PI)
-	{
-		rx = px;
-		ry = py;
-		dof = mapHeight;
-	}
-	while (dof < mapHeight)
-	{
-		mx = (int)rx / 16;
-		my = (int)ry / 16;
-		if ((my >= 0 && mx >= 0 && my < mapHeight && mx < mapWidth)
-			&& (worldMap[my][mx] == 1))
-			// return (ft_dist(px, py, rx, ry));
-			break ;
-		else if (my < 0 || my < 0 || my > mapHeight || mx > mapWidth)
+		// horizontal check
+		float disH, hx=px, hy=py;
+		dof = 0;
+		if (ra < PI)
+		{
+			ry = (((int)py / 16) * 16) - 0.0001;
+			rx = (py - ry) * (-1 / tan(ra)) + px;
+			yo = -16;
+			xo = -yo * (-1 / tan(ra));
+		}
+		if (ra > PI)
+		{
+			ry = (((int)py / 16) * 16) + 16;
+			rx = (py - ry) * (-1 / tan(ra)) + px;
+			yo = 16;
+			xo = -yo * (-1 / tan(ra));
+		}
+		if (!ra || ra == PI)
+		{
+			rx = px;
+			ry = py;
 			dof = mapHeight;
-		else
-		{
-			rx += xo;
-			ry += yo;
-			dof = dof + 1;
 		}
-	}
-	if (rx > 0 && ry > 0)
-		draw_line(test, px+5,py+5,rx,ry,0x00ff00);
-	//vertical check
+		while (dof < mapHeight)
+		{
+			mx = (int)rx / 16;
+			my = (int)ry / 16;
+			if ((my >= 0 && mx >= 0 && my < mapHeight && mx < mapWidth)
+				&& (worldMap[my][mx] == 1))
+			{
+				hx=rx;
+				hy=ry;
+				disH=ft_dist(px, py, hx, hy, ra);
+				dof=mapHeight;
+				break ;
+			}
+				// return (ft_dist(px, py, rx, ry));
+			else if (my < 0 || my < 0 || my > mapHeight || mx > mapWidth)
+				dof = mapHeight;
+			else
+			{
+				rx += xo;
+				ry += yo;
+				dof = dof + 1;
+			}
+		}
 
-	dof = 0;
-	if (ra < P2 || ra > P3)
-	{
-		rx = (((int)px / 16) * 16) - 0.0001;
-		ry = (px - rx) * (-tan(ra)) + py;
-		xo = -16;
-		yo = -xo * (-tan(ra));
-	}
-	if (ra > P2 && ra < P3)
-	{
-		rx = (((int)px / 16) * 16) + 16;
-		ry = (px - rx) * (-tan(ra)) + py;
-		xo = 16;
-		yo = -xo * (-tan(ra));
-	}
-	if (!ra || ra == PI)
-	{
-		rx = px;
-		ry = py;
-		dof = mapWidth;
-	}
-	while (dof < mapWidth)
-	{
-		mx = (int)rx / 16;
-		my = (int)ry / 16;
-		if ((my >= 0 && mx >= 0 && my < mapHeight && mx < mapWidth)
-			&& (worldMap[my][mx] == 1))
-			// return (ft_dist(px, py, rx, ry));
-			break ;
-		else if (my < 0 || my < 0 || my > mapHeight || mx > mapWidth)
-			dof = mapWidth;
-		else
+		//vertical check
+		dof = 0;
+		float disV, vx=px, vy=py;
+		if (ra < P2 || ra > P3)
 		{
-			rx += xo;
-			ry += yo;
-			dof = dof + 1;
+			rx = (((int)px / 16) * 16) - 0.0001;
+			ry = (px - rx) * (-tan(ra)) + py;
+			xo = -16;
+			yo = -xo * (-tan(ra));
 		}
+		if (ra > P2 && ra < P3)
+		{
+			rx = (((int)px / 16) * 16) + 16;
+			ry = (px - rx) * (-tan(ra)) + py;
+			xo = 16;
+			yo = -xo * (-tan(ra));
+		}
+		if (!ra || ra == PI)
+		{
+			rx = px;
+			ry = py;
+			dof = mapWidth;
+		}
+		while (dof < mapWidth)
+		{
+			mx = (int)rx / 16;
+			my = (int)ry / 16;
+			if ((my >= 0 && mx >= 0 && my < mapHeight && mx < mapWidth)
+				&& (worldMap[my][mx] == 1))
+			{
+				vx=rx;
+				vy=ry;
+				disV=ft_dist(px, py, vx, vy, ra); 
+				// dof=mapHeight;
+				dof=mapWidth;
+				break ;
+			}
+			else if (my < 0 || my < 0 || my > mapHeight || mx > mapWidth)
+				dof = mapWidth;
+			else
+			{
+				rx += xo;
+				ry += yo;
+				dof = dof + 1;
+			}
+		}
+		if (disV<disH)
+		{
+			rx=vx;
+			ry=vy;
+			// printf("rx[%f] et ry[%f]\n", rx, ry);
+			draw_line(test, px+5,py+5,rx,ry,0xff0000);
+		}
+		else if (disH<disV)
+		{
+			rx=hx;
+			ry=hy;
+			draw_line(test, px+5,py+5,rx,ry,0xff0000);
+		}
+		else
+			printf("BLA BLAB BLA \n\n");
+		ra+=DR;
+		if (ra < 0)
+			ra+=2*PI;
+		if (ra > 2*PI)
+			ra-=2*PI;
+		r++;
 	}
-	if (rx > 0 && ry > 0)
-		draw_line(test, px+5,py+5,rx,ry,0xff0000);
+
 }
 
 // void	drawRays3D(t_test *test)
@@ -401,7 +443,7 @@ int	handle_kepyress(int keysym, t_test *test)
 	}
 	else if (keysym == A)
 	{
-		pa -= 0.1;
+		pa -= 0.03;
 		if (pa < 0)
 		{
 			pa+=2*PI;
@@ -416,7 +458,7 @@ int	handle_kepyress(int keysym, t_test *test)
 	}
 	else if (keysym == D)
 	{
-		pa += 0.1;
+		pa += 0.03;
 		if (pa > 2*PI)
 		{
 			pa-=2*PI;
