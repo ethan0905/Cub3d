@@ -45,7 +45,11 @@ SRCS = ft_strlen.c \
 	   ft_substr.c \
 	   ft_strtrim.c \
 	   ft_strmapi.c \
-	   ft_split.c
+	   ft_split.c \
+	   ft_free_ls.c \
+	   ft_lstrlen.c \
+	   ft_strjoin_and_free_s1.c \
+	   get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 

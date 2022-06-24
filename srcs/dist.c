@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   dist.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/23 11:20:54 by esafar            #+#    #+#             */
-/*   Updated: 2021/06/04 09:33:35 by esafar           ###   ########.fr       */
+/*   Created: 2022/06/22 15:42:53 by esafar            #+#    #+#             */
+/*   Updated: 2022/06/22 15:42:53 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/cub3d.h"
 
-void	ft_putstr_fd(char *s, int fd)
+float	ft_dist(float x, float y, float x2, float y2)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	return (sqrt(powf(x - x2, 2) + powf(y - y2, 2)));
 }

@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   utils_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/06 09:05:29 by esafar            #+#    #+#             */
-/*   Updated: 2021/06/16 16:29:05 by esafar           ###   ########.fr       */
+/*   Created: 2022/06/22 15:41:51 by esafar            #+#    #+#             */
+/*   Updated: 2022/06/22 15:41:52 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../includes/cub3d.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "../libft/libft.h"
-
-
-int		get_next_line(int fd, char **line);
-
-int		ft_isnewline(char *s);
-
-#endif
+void	ft_utils_game_change(t_data *data, float temp_x, float temp_y)
+{
+	data->pl->px -= temp_x;
+	data->pl->py -= temp_y;
+}

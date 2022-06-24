@@ -48,10 +48,10 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t n);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 char	*ft_itoa(int num);
 void	ft_putchar_fd(char c, int fd);
-int		ft_putstr_fd(char *s, int fd);
+void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -69,4 +69,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void*), void (*del)(void*));
 
+void	ft_free_ls(char **ls);
+int		ft_lstrlen(char **ls);
+char	*ft_strjoin_and_free_s1(char *s1, char *s2);
+char	*get_next_line(int fd);
 #endif
