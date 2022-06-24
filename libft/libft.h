@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:43:47 by esafar            #+#    #+#             */
-/*   Updated: 2021/09/20 11:31:05 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:06:23 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim(const char *s1, const char *set, const char *sep);
 char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 

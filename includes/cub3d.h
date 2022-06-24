@@ -87,6 +87,14 @@ typedef struct s_3d_draw
 	float	ty_step;
 }	t_3d_draw;
 
+typedef struct s_rgb
+{
+	int r;
+	int g;
+	int b;
+	int color;
+}	t_rgb;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -97,8 +105,8 @@ typedef struct s_data
 	t_img		screen;
 	int			size_screen;
 	t_wall		*wall;
-	int			floor;
-	int			sky;
+	t_rgb		floor;
+	t_rgb		sky;
 	int			size;
 	t_player	*pl;
 	t_mini_map	mini_map;
@@ -129,8 +137,8 @@ void	fill_map(t_data *data, char *line, int i, int j);
 int		parse_wall(t_data *data, char *file);
 int		parse_texture(t_data *data, char *line);
 int		get_texture(t_data *data, char **tab);
-int		get_color(char **line);
-int		one_line(char *line);
+int		get_color(t_data *data, char **line, int f_or_s);
+int		one_line(t_data *data, char *line, int f_or_s);
 int		check_map_closed(t_data *data);
 int		check_left(t_data *data);
 int		check_right(t_data *data);
@@ -167,9 +175,10 @@ void	print_texture(t_data *data);
 void	print_all(t_data *data);
 
 void	ft_utils_game_change(t_data *data, float temp_x, float temp_y);
+int	ft_atoc(char *str);
 
-int		get_red(char *line);
-int		get_green(char *line);
-int		get_blue(char *line);
+int		get_red(t_data *data, char *line, int f_or_s);
+int		get_green(t_data *data, char *line, int f_or_s);
+int		get_blue(t_data *data, char *line, int f_or_s);
 
 #endif

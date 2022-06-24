@@ -69,62 +69,13 @@ int	get_texture(t_data *data, char **tab)
 	else if (!ft_strncmp(tab[0], "EA", ft_strlen(tab[0])) && !data->wall->ea.img)
 		data->wall->ea.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "C", ft_strlen(tab[0])) && data->sky == -1)
-		data->sky = get_color(tab);
-	else if (!ft_strncmp(tab[0], "F", ft_strlen(tab[0])) && data->floor == -1)
-		data->floor = get_color(tab);
+	else if (!ft_strncmp(tab[0], "C", ft_strlen(tab[0])) && data->sky.color == -1)
+		data->sky.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
+	else if (!ft_strncmp(tab[0], "F", ft_strlen(tab[0])) && data->floor.color == -1)
+		data->floor.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
 	else
 		return (error_file(5));
-	if (data->sky == -2 || data->floor == -2)
+	if (data->sky.color == -2 || data->floor.color == -2)
 		return (1);
 	return (0);
-}
-
-int	get_color(char **line)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	tmp = NULL;
-	if (ft_lstrlen(line) == 2)
-		return (one_line(line[1]));
-	while (line[++i])
-	{
-		if (!tmp)
-			tmp = ft_strdup(line[i]);
-		else
-			tmp = ft_strjoin_and_free_s1(tmp, line[i]);
-		printf("char *line = [%s]", line[i]);
-		fflush(stdout);
-	}
-	i = one_line(tmp);
-	free(tmp);
-	return (i);
-}
-
-int	one_line(char *line)
-{
-	int	r;
-	int	g;
-	int	b;
-	int	i;
-
-	i = 0;
-	r = get_red(line);
-	while (ft_isdigit(line[++i]))
-		;
-	if (!line[i])
-		return (0 << 24 | r << 16 | 0 << 8 | 0);
-	g = get_green(&line[i]);
-	while (ft_isdigit(line[++i]))
-		;
-	if (!line[i])
-		return (0 << 24 | r << 16 | g << 8 | 0);
-	b = get_blue(&line[i]);
-	while (ft_isdigit(line[++i]))
-		;
-	if (check_no_more(line, i))
-		return (-2);
-	return (0 << 24 | r << 16 | g << 8 | b);
 }

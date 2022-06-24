@@ -9,7 +9,7 @@ int	parsing(t_data *data, char *file)
 	if (parse_wall(data, file))
 		return (1);
 	if (!data->wall->no.img || !data->wall->so.img || !data->wall->we.img
-		|| !data->wall->ea.img || data->floor < 0 || data->sky < 0)
+		|| !data->wall->ea.img || data->floor.color < 0 || data->sky.color < 0)
 		return (error_file(6));
 	data->screen.img = mlx_new_image(data->mlx, 720, 720);
 	tmp = mlx_get_data_addr(data->screen.img, &data->screen.pixel,
@@ -37,8 +37,8 @@ int	init_wall(t_data *data)
 	data->mini_map.ground = NULL;
 	data->mini_map.wall = NULL;
 	data->mini_map.pl = NULL;
-	data->floor = -1;
-	data->sky = -1;
+	data->floor.color = -1;
+	data->sky.color = -1;
 	data->size = 64;
 	data->h = 0;
 	data->l = 0;

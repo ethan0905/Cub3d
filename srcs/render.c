@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:41:39 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 13:03:19 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:35:49 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	draw_vertical_line(t_data *data, float dist, t_3d_dist s, int *img)
 	while (g.y < data->size_screen)
 	{
 		if (g.y < g.line_o)
-			my_mlx_pixel_put(&data->screen, s.r, g.y, 0x96FFFF); //sky color
+			// my_mlx_pixel_put(&data->screen, s.r, g.y, 0x96FFFF); //sky color
+			my_mlx_pixel_put(&data->screen, s.r, g.y, data->sky.color); //sky color
 		else if (g.y > g.line_o && g.y <= g.line_o + g.line_h)
 		{	
 			my_mlx_pixel_put(&data->screen, s.r, g.y,
@@ -36,7 +37,8 @@ void	draw_vertical_line(t_data *data, float dist, t_3d_dist s, int *img)
 			g.ty += g.ty_step;
 		}
 		else
-			my_mlx_pixel_put(&data->screen, s.r, g.y, 0xFFAD6D); //floor color
+			// my_mlx_pixel_put(&data->screen, s.r, g.y, 0xFFAD6D); //floor color
+			my_mlx_pixel_put(&data->screen, s.r, g.y, data->floor.color); //floor color
 		g.y++;
 	}
 }

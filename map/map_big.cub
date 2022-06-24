@@ -1,11 +1,11 @@
-NO ./textures/Wall_0.xpm
-SO ./textures/Wall_0.xpm
-WE ./textures/Wall_0.xpm
-EA ./textures/Wall_0.xpm
+NO ./textures/wall_01.xpm
+SO ./textures/wall_03.xpm
+WE ./textures/wall_02.xpm
+EA ./textures/wall_04.xpm
 
-F 186,222,255
+F 211,255,156
 
-C 255,222,186
+C 144,225,255
 
 1111111111111111111111111
 1000000000110000000000001

@@ -3,50 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:18:11 by esafar            #+#    #+#             */
-/*   Updated: 2021/06/04 09:32:31 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:06:12 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int	ft_is_char_from_set(const char *set, char c)
+static int	ft_isinset(const char *set, const char c)
 {
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
 	while (set[i])
 	{
 		if (set[i] == c)
 			return (1);
-		i++;
+		++i;
 	}
 	return (0);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(const char *s1, const char *set, const char *sep)
 {
-	size_t	i;
-	size_t	start;
-	size_t	end;
-	char	*lajoconde;
+	unsigned int	start;
+	int				i;
 
+	if (s1 == NULL || set == NULL || sep == NULL)
+		return (NULL);
 	start = 0;
-	if (!s1 || !set)
-		return (NULL);
-	while (s1[start] && ft_is_char_from_set(set, s1[start]))
-		start++;
-	end = ft_strlen((char *)s1);
-	while (start < end && ft_is_char_from_set(set, s1[end - 1]))
-		end--;
-	lajoconde = (char *)malloc(sizeof(char) * (end - start + 1));
-	if (!lajoconde)
-		return (NULL);
-	i = 0;
-	while (start < end)
-		lajoconde[i++] = s1[start++];
-	lajoconde[i] = '\0';
-	return (lajoconde);
+	while ((ft_isinset(set, s1[start]) || ft_isinset(sep, s1[start]))
+		&& s1[start])
+		++start;
+	i = ft_strlen(s1) - 1;
+	while ((ft_isinset(set, s1[i]) || ft_isinset(sep, s1[i]))
+		&& s1[start] && i >= 0)
+		--i;
+	return (ft_substr(s1, start, ++i - start));
 }
