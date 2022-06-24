@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:49:06 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 18:49:06 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 19:09:32 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	exit_before_exec(t_data *data)
 {
 	free_img(data);
-	if (data->wall)
-		free(data->wall);
+	if (data->w)
+		free(data->w);
 	if (data->map)
 		ft_free_ls(data->map);
 	if (data->pl)
@@ -27,14 +27,14 @@ void	exit_before_exec(t_data *data)
 
 void	free_img(t_data *data)
 {
-	if (data->wall->no.img)
-		mlx_destroy_image(data->mlx, data->wall->no.img);
-	if (data->wall->so.img)
-		mlx_destroy_image(data->mlx, data->wall->so.img);
-	if (data->wall->we.img)
-		mlx_destroy_image(data->mlx, data->wall->we.img);
-	if (data->wall->ea.img)
-		mlx_destroy_image(data->mlx, data->wall->ea.img);
+	if (data->w->no.img)
+		mlx_destroy_image(data->mlx, data->w->no.img);
+	if (data->w->so.img)
+		mlx_destroy_image(data->mlx, data->w->so.img);
+	if (data->w->we.img)
+		mlx_destroy_image(data->mlx, data->w->we.img);
+	if (data->w->ea.img)
+		mlx_destroy_image(data->mlx, data->w->ea.img);
 	if (data->screen.img)
 		mlx_destroy_image(data->mlx, data->screen.img);
 	if (data->mini_map.ground)
@@ -48,8 +48,8 @@ void	free_img(t_data *data)
 int	end(t_data *data)
 {
 	free_img(data);
-	if (data->wall)
-		free(data->wall);
+	if (data->w)
+		free(data->w);
 	mlx_clear_window(data->mlx, data->win);
 	mlx_destroy_window(data->mlx, data->win);
 	ft_free_ls(data->map);

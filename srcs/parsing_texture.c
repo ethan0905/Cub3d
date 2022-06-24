@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:52:25 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 18:52:33 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 19:09:07 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,25 +69,25 @@ int	parse_texture(t_data *data, char *line)
 
 int	get_texture(t_data *data, char **tab)
 {
-	if (!ft_strncmp(tab[0], "NO", ft_strlen(tab[0])) && !data->wall->no.img)
-		data->wall->no.img = mlx_xpm_file_to_image(data->mlx, tab[1],
+	if (!ft_strncmp(tab[0], "NO", ft_strlen(tab[0])) && !data->w->no.img)
+		data->w->no.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "SO", ft_strlen(tab[0])) && !data->wall->so.img)
-		data->wall->so.img = mlx_xpm_file_to_image(data->mlx, tab[1],
+	else if (!ft_strncmp(tab[0], "SO", ft_strlen(tab[0])) && !data->w->so.img)
+		data->w->so.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "WE", ft_strlen(tab[0])) && !data->wall->we.img)
-		data->wall->we.img = mlx_xpm_file_to_image(data->mlx, tab[1],
+	else if (!ft_strncmp(tab[0], "WE", ft_strlen(tab[0])) && !data->w->we.img)
+		data->w->we.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "EA", ft_strlen(tab[0])) && !data->wall->ea.img)
-		data->wall->ea.img = mlx_xpm_file_to_image(data->mlx, tab[1],
+	else if (!ft_strncmp(tab[0], "EA", ft_strlen(tab[0])) && !data->w->ea.img)
+		data->w->ea.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "C", ft_strlen(tab[0])) && data->sky.color == -1)
-		data->sky.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
-	else if (!ft_strncmp(tab[0], "F", ft_strlen(tab[0])) && data->floor.color == -1)
-		data->floor.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
+	else if (!ft_strncmp(tab[0], "C", ft_strlen(tab[0])) && data->s.color == -1)
+		data->s.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
+	else if (!ft_strncmp(tab[0], "F", ft_strlen(tab[0])) && data->f.color == -1)
+		data->f.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
 	else
 		return (error_file(5));
-	if (data->sky.color == -2 || data->floor.color == -2)
+	if (data->s.color == -2 || data->f.color == -2)
 		return (1);
 	return (0);
 }

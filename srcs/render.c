@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:41:39 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 18:49:32 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 19:10:06 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_vertical_line(t_data *data, float dist, t_3d_dist s, int *img)
 	while (g.y < data->size_screen)
 	{
 		if (g.y < g.line_o)
-			my_mlx_pixel_put(&data->screen, s.r, g.y, data->sky.color);
+			my_mlx_pixel_put(&data->screen, s.r, g.y, data->s.color);
 		else if (g.y > g.line_o && g.y <= g.line_o + g.line_h)
 		{	
 			my_mlx_pixel_put(&data->screen, s.r, g.y,
@@ -36,7 +36,7 @@ void	draw_vertical_line(t_data *data, float dist, t_3d_dist s, int *img)
 			g.ty += g.ty_step;
 		}
 		else
-			my_mlx_pixel_put(&data->screen, s.r, g.y, data->floor.color);
+			my_mlx_pixel_put(&data->screen, s.r, g.y, data->f.color);
 		g.y++;
 	}
 }

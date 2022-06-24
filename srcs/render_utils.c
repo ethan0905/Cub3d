@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:41:58 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 13:03:19 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 19:09:32 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	dist_x(t_data *data, float dist, t_3d_dist g)
 	if (g.ra > PI)
 	{
 		g.tx = data->size - 1 - g.tx;
-		draw_vertical_line(data, dist, g, data->wall->so.addr);
+		draw_vertical_line(data, dist, g, data->w->so.addr);
 	}
 	else
-		draw_vertical_line(data, dist, g, data->wall->no.addr);
+		draw_vertical_line(data, dist, g, data->w->no.addr);
 }
 
 void	dist_y(t_data *data, float dist, t_3d_dist g)
@@ -30,10 +30,10 @@ void	dist_y(t_data *data, float dist, t_3d_dist g)
 	if (g.ra < P2 || g.ra > P3)
 	{
 		g.tx = data->size - 1 - g.tx;
-		draw_vertical_line(data, dist, g, data->wall->we.addr);
+		draw_vertical_line(data, dist, g, data->w->we.addr);
 	}
 	else
-		draw_vertical_line(data, dist, g, data->wall->ea.addr);
+		draw_vertical_line(data, dist, g, data->w->ea.addr);
 }
 
 void	draw_vertical_line_init(t_data *data, t_3d_draw *g, float dist)

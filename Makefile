@@ -6,7 +6,7 @@
 #    By: esafar <esafar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 15:43:36 by esafar            #+#    #+#              #
-#    Updated: 2022/06/24 18:35:54 by esafar           ###   ########.fr        #
+#    Updated: 2022/06/24 19:10:30 by esafar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRCS	=	srcs/main.c \
 			srcs/exit.c \
 			srcs/check_map.c \
 			srcs/parsing_player.c \
-			srcs/mini_map.c \
 			srcs/start.c \
 			srcs/check_move.c \
 			srcs/render.c \

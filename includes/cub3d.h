@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:40:36 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 18:45:21 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 19:09:06 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ typedef struct s_data
 	int			l;
 	t_img		screen;
 	int			size_screen;
-	t_wall		*wall;
-	t_rgb		floor;
-	t_rgb		sky;
+	t_wall		*w;
+	t_rgb		f;
+	t_rgb		s;
 	int			size;
 	t_player	*pl;
 	t_mini_map	mini_map;
