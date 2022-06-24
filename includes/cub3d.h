@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/24 18:40:36 by esafar            #+#    #+#             */
+/*   Updated: 2022/06/24 18:45:21 by esafar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -12,8 +24,8 @@
 # include "../mlx/mlx_int.h"
 
 # define PI 3.1415926535
-# define P2 PI/2
-# define P3 3*PI/2
+# define P2 1.57079632675
+# define P3 4.71238898025
 # define MV 5
 # define DR 0.0174533
 
@@ -89,10 +101,7 @@ typedef struct s_3d_draw
 
 typedef struct s_rgb
 {
-	int r;
-	int g;
-	int b;
-	int color;
+	int	color;
 }	t_rgb;
 
 typedef struct s_data
@@ -137,8 +146,6 @@ void	fill_map(t_data *data, char *line, int i, int j);
 int		parse_wall(t_data *data, char *file);
 int		parse_texture(t_data *data, char *line);
 int		get_texture(t_data *data, char **tab);
-int		get_color(t_data *data, char **line, int f_or_s);
-int		one_line(t_data *data, char *line, int f_or_s);
 int		check_map_closed(t_data *data);
 int		check_left(t_data *data);
 int		check_right(t_data *data);
@@ -175,10 +182,6 @@ void	print_texture(t_data *data);
 void	print_all(t_data *data);
 
 void	ft_utils_game_change(t_data *data, float temp_x, float temp_y);
-int	ft_atoc(char *str);
-
-int		get_red(t_data *data, char *line, int f_or_s);
-int		get_green(t_data *data, char *line, int f_or_s);
-int		get_blue(t_data *data, char *line, int f_or_s);
+int		ft_atoc(char *str);
 
 #endif

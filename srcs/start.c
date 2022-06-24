@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:41:47 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/22 15:43:27 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/24 18:53:46 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	handle_keypress(int key, t_data *data)
 		move_frontback(data, 1, data->pl);
 	if (key == D)
 		move_leftright(data, 1, data->pl);
-	if (key == ESC || key == LEFT_ARROW || key == RIGHT_ARROW || key == W || key == A
-		|| key == S || key == D)
+	if (key == ESC || key == LEFT_ARROW || key == RIGHT_ARROW || key == W
+		|| key == A || key == S || key == D)
 		render(data);
 	return (0);
 }
