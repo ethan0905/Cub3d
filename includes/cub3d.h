@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: achane-l <achane-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:40:36 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 19:09:06 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/28 00:18:11 by achane-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_data
 	t_mini_map	mini_map;
 }	t_data;
 
+int		check_player_is_in_map(t_data *data);
 int		start(t_data d);
 void	render(t_data *data);
 void	draw_vertical_line(t_data *data, float dist, t_3d_dist s, int *img);

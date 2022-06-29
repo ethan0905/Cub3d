@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: achane-l <achane-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:46:25 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 18:46:26 by esafar           ###   ########.fr       */
+/*   Updated: 2022/06/27 23:50:41 by achane-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	parse_map(t_data *data, char *file)
 	if (init_player(data))
 		return (1);
 	if (get_player_info(data))
+		return (1);
+	if (check_player_is_in_map(data))
 		return (1);
 	return (0);
 }
