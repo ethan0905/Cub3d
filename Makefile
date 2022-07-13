@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: achane-l <achane-l@student.42.fr>          +#+  +:+       +#+         #
+#    By: esafar <esafar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 15:43:36 by esafar            #+#    #+#              #
-#    Updated: 2022/06/28 00:17:10 by achane-l         ###   ########.fr        #
+#    Updated: 2022/07/13 14:09:29 by esafar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ LIBFT	=	libft/ft_lstrlen.c \
 			libft/ft_free_ls.c \
 			libft/ft_atoi.c \
 			libft/ft_isdigit.c \
+			libft/ft_strcmp.c \
 			libft/ft_strncmp.c \
 			libft/ft_strlen.c \
 			libft/ft_strjoin_and_free_s1.c \

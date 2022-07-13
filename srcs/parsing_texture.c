@@ -6,7 +6,7 @@
 /*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:52:25 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/24 19:09:07 by esafar           ###   ########.fr       */
+/*   Updated: 2022/07/13 14:06:57 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,21 @@ int	parse_texture(t_data *data, char *line)
 
 int	get_texture(t_data *data, char **tab)
 {
-	if (!ft_strncmp(tab[0], "NO", ft_strlen(tab[0])) && !data->w->no.img)
+	if (!ft_strcmp(tab[0], "NO") && !data->w->no.img)
 		data->w->no.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "SO", ft_strlen(tab[0])) && !data->w->so.img)
+	else if (!ft_strcmp(tab[0], "SO") && !data->w->so.img)
 		data->w->so.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "WE", ft_strlen(tab[0])) && !data->w->we.img)
+	else if (!ft_strcmp(tab[0], "WE") && !data->w->we.img)
 		data->w->we.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "EA", ft_strlen(tab[0])) && !data->w->ea.img)
+	else if (!ft_strcmp(tab[0], "EA") && !data->w->ea.img)
 		data->w->ea.img = mlx_xpm_file_to_image(data->mlx, tab[1],
 				&data->size, &data->size);
-	else if (!ft_strncmp(tab[0], "C", ft_strlen(tab[0])) && data->s.color == -1)
+	else if (!ft_strcmp(tab[0], "C") && data->s.color == -1)
 		data->s.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
-	else if (!ft_strncmp(tab[0], "F", ft_strlen(tab[0])) && data->f.color == -1)
+	else if (!ft_strcmp(tab[0], "F") && data->f.color == -1)
 		data->f.color = ft_atoc(ft_strtrim(tab[1], " ", "\t"));
 	else
 		return (error_file(5));

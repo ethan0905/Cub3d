@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: esafar <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: esafar <esafar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/03 15:40:15 by esafar            #+#    #+#              #
-#    Updated: 2021/09/10 09:09:07 by esafar           ###   ########.fr        #
+#    Updated: 2022/07/13 14:09:09 by esafar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS = ft_strlen.c \
 	   ft_bzero.c \
 	   ft_atoi.c \
 	   ft_strchr.c \
+	   ft_strcmp.c \
 	   ft_strncmp.c \
 	   ft_strrchr.c \
 	   ft_strdup.c \
