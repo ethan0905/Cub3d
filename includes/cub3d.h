@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achane-l <achane-l@student.42.fr>          +#+  +:+       +#+        */
+/*   By: esafar <esafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:40:36 by esafar            #+#    #+#             */
-/*   Updated: 2022/06/28 00:18:11 by achane-l         ###   ########.fr       */
+/*   Updated: 2022/07/12 12:04:26 by esafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,12 @@ void	print_texture(t_data *data);
 void	print_all(t_data *data);
 
 void	ft_utils_game_change(t_data *data, float temp_x, float temp_y);
+int		check_wall_around_player(t_data *data, int x_pos_player, \
+	int y_pos_player);
+int		check_bottom_pl(char **map, int x, int y);
+int		check_top_pl(char **map, int x, int y);
+int		check_right_pl(char **map, int x, int y);
+int		check_left_pl(char **map, int x, int y);
 int		ft_atoc(char *str);
 
 #endif
