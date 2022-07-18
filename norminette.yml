@@ -1,0 +1,2 @@
+- name: 42 Norminette
+  uses: alexandregv/norminette-action@v3
